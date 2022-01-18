@@ -4,7 +4,6 @@ const { isMac } = require('./helpers/platform')
 
 exports.menuTemplate = () => {
     return template = [
-        // { role: 'appMenu' }
         ...(isMac() ? [{
             label: app.name,
             submenu: [
@@ -19,16 +18,54 @@ exports.menuTemplate = () => {
                 { role: 'quit' }
             ]
         }] : []),
-        // { role: 'fileMenu' }
+        // File
         {
-            label: 'File',
+            label: '&File',
             submenu: [
+                { 
+                    label: 'Preferences',
+                    submenu: [
+                        {
+                            label: 'Toggle Dark Mode',
+                            accelerator: 'CmdOrCtrl+D',
+                            type: 'checkbox',
+                            click: (e) => {
+                                toggleDarkMode(e, messengerView, instagramView)
+                            }
+                        },
+                        { role: 'separator' },
+                        {
+                            label: 'Messenger && Instagram',
+                            type: 'radio',
+                            accelerator: 'CmdOrCtrl+Shift+1',
+                            click: () => {
+                                showViews('both')
+                            }
+                        },
+                        {
+                            label: 'Messenger only',
+                            type: 'radio',
+                            accelerator: 'CmdOrCtrl+Shift+2',
+                            click: () => {
+                                showViews('messenger')
+                            }
+                        },
+                        {
+                            label: 'Instagram only',
+                            type: 'radio',
+                            accelerator: 'CmdOrCtrl+Shift+3',
+                            click: () => {
+                                showViews('instagram')
+                            }
+                        }
+                    ]
+                },
                 (isMac()) ? { role: 'close' } : { role: 'quit' }
             ]
         },
-        // { role: 'editMenu' }
+        // Edit
         {
-            label: 'Edit',
+            label: '&Edit',
             submenu: [
                 { role: 'undo' },
                 { role: 'redo' },
@@ -55,65 +92,35 @@ exports.menuTemplate = () => {
                 ])
             ]
         },
-        // { role: 'viewMenu' }
+        // View
         {
-            label: 'View',
+            label: '&View',
+            role: 'viewMenu',
             submenu: [
                 {
-                    label: 'Dark Mode',
-                    accelerator: 'CmdOrCtrl+D',
-                    type: 'checkbox',
-                    click: (e) => {
-                        toggleDarkMode(e, messengerView, instagramView)
+                    label: 'Reload Messenger',
+                    click: () => {
+                        reloadView(messengerView)
                     }
                 },
                 {
-                    label: 'Show',
-                    type: 'submenu',
-                    submenu: [
-                        {
-                            label: 'Messenger && Instagram',
-                            type: 'radio',
-                            accelerator: 'CmdOrCtrl+Shift+1',
-                            click: () => {
-                                showViews('both')
-                            }
-                        },
-                        {
-                            label: 'Messenger only',
-                            type: 'radio',
-                            accelerator: 'CmdOrCtrl+Shift+2',
-                            click: () => {
-                                showViews('messenger')
-                            }
-                        },
-                        {
-                            label: 'Instagram only',
-                            type: 'radio',
-                            accelerator: 'CmdOrCtrl+Shift+3',
-                            click: () => {
-                                showViews('instagram')
-                            }
-                        },
-                    ]
+                    label: 'Reload Instagram',
+                    click: () => {
+                        reloadView(instagramView)
+                    }
                 },
-                { role: 'reload' },
-                { role: 'forceReload' },
-                { role: 'toggleDevTools' },
-                { type: 'separator' },
-                { role: 'resetZoom' },
+                { role: 'separator' },
                 { role: 'zoomIn' },
                 { role: 'zoomOut' },
-                { type: 'separator' },
-                { role: 'togglefullscreen' }
+                { role: 'resetZoom' },
             ]
         },
-        // { role: 'windowMenu' }
+        // Window
         {
-            label: 'Window',
+            label: '&Window',
             submenu: [
                 { role: 'minimize' },
-                { role: 'zoom' },
+                { role: 'togglefullscreen' },
                 ...(isMac() ? [
                     { type: 'separator' },
                     { role: 'front' },
@@ -124,14 +131,23 @@ exports.menuTemplate = () => {
                 ])
             ]
         },
+        // Help
         {
-            role: 'help',
+            role: 'about',
+            label: '&About',
             submenu: [
                 {
                     label: 'View Code',
                     click: async () => {
                         const { shell } = require('electron')
                         await shell.openExternal('https://github.com/stavros-melidoniotis/messengram')
+                    }
+                },
+                {
+                    label: 'Creator',
+                    click: async () => {
+                        const { shell } = require('electron')
+                        await shell.openExternal('https://www.linkedin.com/in/stavros-melidoniotis/')
                     }
                 }
             ]
@@ -202,4 +218,16 @@ function showViews(viewToShow) {
             messengerView.setBounds({ x: 0, y: 0, width: WINDOW_WIDTH, height: WINDOW_HEIGHT })
             break
     }
+}
+
+function reloadView(view) {
+    const browserViews = window.getBrowserViews()
+    const viewIsVisible = browserViews.find(browserView => {
+        return browserView === view
+    })
+
+    if (!viewIsVisible) return
+
+    window.removeBrowserView(view)
+    window.addBrowserView(view)
 }
