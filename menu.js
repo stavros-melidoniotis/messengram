@@ -148,7 +148,10 @@ function toggleDarkMode(event, messengerView, instagramView) {
             -ms-filter: invert(100%); 
         }
         
-        img, image {
+        img, 
+        svg,
+        .jllm4f4h,
+        .qbubdy2e {
             -webkit-filter: invert(1);
             -moz-filter: invert(1);
             -o-filter: invert(1);
@@ -163,7 +166,10 @@ function toggleDarkMode(event, messengerView, instagramView) {
             -ms-filter: invert(0); 
         }
 
-        img, image {
+        img, 
+        svg,
+        .jllm4f4h,
+        .qbubdy2e {
             -webkit-filter: invert(0);
             -moz-filter: invert(0);
             -o-filter: invert(0);
