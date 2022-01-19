@@ -26,10 +26,33 @@ app.whenReady()
 
         Menu.setApplicationMenu(menu)
 
+        // Set the initial views based on user preferences
+        setTimeout(() => {
+            showViews(settingsHelper.getViewsToShowSetting())
+        }, 100)
+
+        // Set dark theme on/off based on user preferences
         setTimeout(() => {
             toggleDarkMode(settingsHelper.getDarkModeSetting())
-            showViews(settingsHelper.getViewsToShowSetting())
-        }, 2000)
+        }, 1000)
+
+        // Resize views when window gets maximized
+        window.on('resize', () => {
+            if (!window.isMaximized()) return
+
+            const attachedViews = window.getBrowserViews()
+            const totalViews = attachedViews.length
+            const windowBounds = window.getBounds()
+
+            for (let view of attachedViews) {
+                const currentX = view.getBounds().x
+                const currentY = view.getBounds().y
+
+                setTimeout(() => {
+                    view.setBounds({ x: currentX, y: currentY, width: Math.floor(windowBounds.width / totalViews), height: windowBounds.height })
+                }, 50)
+            }
+        })
     }
 )
 

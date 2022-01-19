@@ -58,23 +58,25 @@ exports.toggleDarkMode = (enable, triggeredFromMenu = false) => {
 }
 
 exports.showViews = (viewToShow, triggeredFromMenu = false) => {
+    const windowBounds = window.getBounds()
+
     switch (viewToShow) {
         case 'both':
             window.addBrowserView(messengerView)
-            messengerView.setBounds({ x: 0, y: 0, width: WINDOW_WIDTH / 2, height: WINDOW_HEIGHT })
+            messengerView.setBounds({ x: 0, y: 0, width: Math.floor(windowBounds.width / 2), height: windowBounds.height })
 
             window.addBrowserView(instagramView)
-            instagramView.setBounds({ x: WINDOW_WIDTH / 2, y: 0, width: WINDOW_WIDTH / 2, height: WINDOW_HEIGHT })
+            instagramView.setBounds({ x: Math.floor(windowBounds.width / 2), y: 0, width: Math.floor(windowBounds.width / 2), height: windowBounds.height })
             break
         case 'instagram':
             window.removeBrowserView(messengerView)
             window.addBrowserView(instagramView)
-            instagramView.setBounds({ x: 0, y: 0, width: WINDOW_WIDTH, height: WINDOW_HEIGHT })
+            instagramView.setBounds({ x: 0, y: 0, width: windowBounds.width, height: windowBounds.height })
             break
         case 'messenger':
             window.removeBrowserView(instagramView)
             window.addBrowserView(messengerView)
-            messengerView.setBounds({ x: 0, y: 0, width: WINDOW_WIDTH, height: WINDOW_HEIGHT })
+            messengerView.setBounds({ x: 0, y: 0, width: windowBounds.width, height: windowBounds.height })
             break
     }
 
