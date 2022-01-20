@@ -1,15 +1,28 @@
 {
   "name": "messengram",
   "version": "1.0.0",
-  "description": "Messenger and Instagram combined under a single cross-platform app",
+  "description": "Messenger and Instagram combined under a single cross-platform app.",
   "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron ."
   },
-  "author": "Stavros Melidoniotis",
+  "author": "Stavros Melidoniotis <melidon.stavros@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "electron": "^16.0.7"
+  },
+  "build": {
+    "productName": "Messengram",
+    "appId": "gr.stavros_melidoniotis.${name}",
+    "directories": {
+      "output": "dist"
+    },
+    "linux": {
+      "target": "deb",
+      "icon": "",
+      "synopsis": "Messenger and Instagram combined under a single cross-platform app.",
+      "category": "InstantMessaging"
+    }
   }
 }
