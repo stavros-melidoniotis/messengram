@@ -20,7 +20,7 @@
     },
     "linux": {
       "target": "deb",
-      "icon": "",
+      "icon": "build/icon.icns",
       "synopsis": "Messenger and Instagram combined under a single cross-platform app.",
       "category": "InstantMessaging"
     }
