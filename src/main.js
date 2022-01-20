@@ -4,7 +4,7 @@ const { isMac } = require('./helpers/platform')
 const settingsHelper = require('./helpers/settings')
 
 const createWindow = () => {
-    const { window } = require('./UI/browser-window')
+    const { window } = require('./browser/browser-window')
 
     return window
 }
@@ -16,7 +16,7 @@ app.whenReady()
         }
     })
     .then(() => {
-        const { messengerView, instagramView } = require('./UI/browser-views')
+        const { messengerView, instagramView } = require('./browser/browser-views')
         const { menu } = require('./menu/menu-template')
         const { toggleDarkMode, showViews } = require('./menu/menu-functions')
 

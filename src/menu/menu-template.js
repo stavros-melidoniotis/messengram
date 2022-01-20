@@ -1,6 +1,6 @@
 const { Menu } = require('electron')
 const { toggleDarkMode, showViews, reloadView } = require('./menu-functions')
-const { messengerView, instagramView } = require('../UI/browser-views')
+const { messengerView, instagramView } = require('../browser/browser-views')
 const { isMac } = require('../helpers/platform')
 
 const template = [

@@ -1,7 +1,7 @@
 const settingsHelper = require('../helpers/settings')
 
-const { window, WINDOW_WIDTH, WINDOW_HEIGHT } = require('../UI/browser-window')
-const { messengerView, instagramView } = require('../UI/browser-views')
+const { window, WINDOW_WIDTH, WINDOW_HEIGHT } = require('../browser/browser-window')
+const { messengerView, instagramView } = require('../browser/browser-views')
 
 exports.toggleDarkMode = (enable, triggeredFromMenu = false) => {
     const darkThemeCSS = `
