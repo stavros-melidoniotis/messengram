@@ -23,6 +23,16 @@
       "icon": "build/icon.icns",
       "synopsis": "Messenger and Instagram combined under a single cross-platform app.",
       "category": "InstantMessaging"
+    },
+    "mac": {
+      "category": "public.app-category.social-networking",
+      "target": "dmg",
+      "icon": "build/icon.icns",
+      "darkModeSupport": true
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
     }
   }
 }
