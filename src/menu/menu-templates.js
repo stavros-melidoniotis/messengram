@@ -1,9 +1,9 @@
 const { Menu } = require('electron')
-const { toggleDarkMode, showViews, reloadView } = require('./menu-functions')
+const menuFunctions = require('./menu-functions')
 const { messengerView, instagramView } = require('../browser/browser-views')
 const { isMac } = require('../helpers/platform')
 
-const template = [
+const app_menu_template = [
     ...(isMac() ? [{
         label: app.name,
         submenu: [
@@ -31,7 +31,7 @@ const template = [
                         accelerator: 'CmdOrCtrl+D',
                         type: 'checkbox',
                         click: (e) => {
-                            toggleDarkMode(e.checked, true)
+                            menuFunctions.toggleDarkMode(e.checked, true)
                         }
                     },
                     { role: 'separator' },
@@ -40,8 +40,8 @@ const template = [
                         id: 'menu_item_show_both',
                         type: 'radio',
                         accelerator: 'CmdOrCtrl+Shift+1',
-                        click: (e) => {
-                            showViews('both', true)
+                        click: () => {
+                            menuFunctions.showViews('both', true)
                         }
                     },
                     {
@@ -49,8 +49,8 @@ const template = [
                         id: 'menu_item_show_messenger',
                         type: 'radio',
                         accelerator: 'CmdOrCtrl+Shift+2',
-                        click: (e) => {
-                            showViews('messenger', true)
+                        click: () => {
+                            menuFunctions.showViews('messenger', true)
                         }
                     },
                     {
@@ -58,8 +58,8 @@ const template = [
                         id: 'menu_item_show_instagram',
                         type: 'radio',
                         accelerator: 'CmdOrCtrl+Shift+3',
-                        click: (e) => {
-                            showViews('instagram', true)
+                        click: () => {
+                            menuFunctions.showViews('instagram', true)
                         }
                     }
                 ]
@@ -104,13 +104,13 @@ const template = [
             {
                 label: 'Reload Messenger',
                 click: () => {
-                    reloadView(messengerView)
+                    menuFunctions.reloadView(messengerView)
                 }
             },
             {
                 label: 'Reload Instagram',
                 click: () => {
-                    reloadView(instagramView)
+                    menuFunctions.reloadView(instagramView)
                 }
             },
             { role: 'separator' },
@@ -158,6 +158,31 @@ const template = [
     }
 ]
 
-const menu = Menu.buildFromTemplate(template)
+const tray_menu_template = [
+    { 
+        label: 'Toggle',
+        type: 'normal',
+        click: () => {
+            menuFunctions.toggleAppVisibility()
+        } 
+    },
+    { 
+        label: 'Relaunch', 
+        click: () => {
+            menuFunctions.relaunchApp()
+        } 
+    },
+    { type: 'separator' },
+    { 
+        label: 'Quit', 
+        role: 'quit' 
+    }
+]
 
-module.exports = { menu }
+const app_menu = Menu.buildFromTemplate(app_menu_template)
+const tray_menu = Menu.buildFromTemplate(tray_menu_template)
+
+module.exports = { 
+    app_menu: app_menu,
+    tray_menu: tray_menu
+}

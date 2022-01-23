@@ -1,6 +1,7 @@
 const settingsHelper = require('../helpers/settings')
 
-const { window, WINDOW_WIDTH, WINDOW_HEIGHT } = require('../browser/browser-window')
+const { app } = require('electron')
+const { window } = require('../browser/browser-window')
 const { messengerView, instagramView } = require('../browser/browser-views')
 
 exports.toggleDarkMode = (enable, triggeredFromMenu = false) => {
@@ -113,4 +114,13 @@ exports.reloadView = (view) => {
 
     window.removeBrowserView(view)
     window.addBrowserView(view)
+}
+
+exports.toggleAppVisibility = () => {
+    (window.isVisible()) ? window.hide() : window.show()
+}
+
+exports.relaunchApp = () => {
+    app.relaunch()
+    app.quit()
 }
