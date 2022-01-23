@@ -10,6 +10,24 @@ const window = new BrowserWindow({
     center: true
 })
 
+// Resize views when window gets maximized
+window.on('resize', () => {
+    if (!window.isMaximized()) return
+
+    const attachedViews = window.getBrowserViews()
+    const totalViews = attachedViews.length
+    const windowBounds = window.getBounds()
+
+    for (let view of attachedViews) {
+        const currentX = view.getBounds().x
+        const currentY = view.getBounds().y
+
+        setTimeout(() => {
+            view.setBounds({ x: currentX, y: currentY, width: Math.floor(windowBounds.width / totalViews), height: windowBounds.height })
+        }, 50)
+    }
+})
+
 module.exports = { 
     window: window,
     WINDOW_WIDTH: WINDOW_WIDTH,
