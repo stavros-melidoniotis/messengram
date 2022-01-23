@@ -1,10 +1,10 @@
 {
   "name": "messengram",
+  "productName": "Messengram",
   "version": "1.0.0",
   "description": "Messenger and Instagram combined under a single cross-platform app.",
   "main": "src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron ."
   },
   "author": "Stavros Melidoniotis <melidon.stavros@gmail.com>",

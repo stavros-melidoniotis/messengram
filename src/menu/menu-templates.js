@@ -1,4 +1,4 @@
-const { Menu } = require('electron')
+const { app, Menu } = require('electron')
 const menuFunctions = require('./menu-functions')
 const { messengerView, instagramView } = require('../browser/browser-views')
 const { isMac } = require('../helpers/platform')
@@ -113,7 +113,7 @@ const app_menu_template = [
                     menuFunctions.reloadView(instagramView)
                 }
             },
-            { role: 'separator' },
+            { type: 'separator' },
             { role: 'zoomIn' },
             { role: 'zoomOut' },
             { role: 'resetZoom' },
@@ -137,21 +137,45 @@ const app_menu_template = [
     },
     // Help
     {
-        role: 'about',
-        label: '&About',
+        // role: 'about',
+        label: '&Help',
+        type: 'submenu',
         submenu: [
             {
-                label: 'View Code',
-                click: async () => {
-                    const { shell } = require('electron')
-                    await shell.openExternal('https://github.com/stavros-melidoniotis/messengram')
+                label: 'Visit Website',
+                click: () => {
+                    menuFunctions.openExternalUrl('https://stavros-melidoniotis.github.io/messengram')
                 }
             },
             {
-                label: 'Creator',
-                click: async () => {
-                    const { shell } = require('electron')
-                    await shell.openExternal('https://www.linkedin.com/in/stavros-melidoniotis/')
+                label: 'Source Code',
+                click: () => {
+                    menuFunctions.openExternalUrl('https://github.com/stavros-melidoniotis/messengram')
+                }
+            },
+            {
+                label: 'Report an Issue',
+                type: 'submenu',
+                submenu: [
+                    {
+                        label: 'via Email',
+                        click: () => {
+                            menuFunctions.openExternalUrl('mailto:melidon.stavros@gmail.com')
+                        }
+                    },
+                    {
+                        label: 'via Github',
+                        click: () => {
+                            menuFunctions.openExternalUrl('https://github.com/stavros-melidoniotis/messengram/issues')
+                        }
+                    }
+                ]
+            },
+            { type: 'separator' },
+            {
+                label: `About ${app.getName()}`,
+                click: () => {
+                    app.showAboutPanel()
                 }
             }
         ]

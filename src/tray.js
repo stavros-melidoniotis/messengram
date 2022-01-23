@@ -4,7 +4,7 @@ const { isMac } = require('./helpers/platform')
 
 const path = require('path')
 
-const trayIconPath = path.join(__dirname, '..', 'build/icon.png')
+const trayIconPath = path.join(__dirname, '..', 'build', 'icons', '512x512.png')
 const tray = new Tray(trayIconPath)
 
 tray.setToolTip(app.getName())

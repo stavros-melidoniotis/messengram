@@ -1,8 +1,17 @@
 const settingsHelper = require('../helpers/settings')
+const path = require('path')
 
 const { app } = require('electron')
 const { window } = require('../browser/browser-window')
 const { messengerView, instagramView } = require('../browser/browser-views')
+
+app.setAboutPanelOptions({
+    applicationName: app.getName(),
+    applicationVersion: app.getVersion(),
+    version: app.getVersion(),
+    authors: ['Stavros Melidoniotis <melidon.stavros@gmail.com>'],
+    iconPath: path.join(__dirname, '..', '..', 'build', 'icons', '64x64.png')
+})
 
 exports.toggleDarkMode = (enable, triggeredFromMenu = false) => {
     const darkThemeCSS = `
@@ -123,4 +132,9 @@ exports.toggleAppVisibility = () => {
 exports.relaunchApp = () => {
     app.relaunch()
     app.quit()
+}
+
+exports.openExternalUrl = async (url) => {
+    const { shell } = require('electron')
+    await shell.openExternal(url)
 }
