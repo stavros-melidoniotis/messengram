@@ -1,7 +1,7 @@
 const { app, Menu } = require('electron')
-const menuFunctions = require('./menu-functions')
 const { messengerView, instagramView } = require('../browser/browser-views')
 const { isMac } = require('../helpers/platform')
+const menuFunctions = require('./menu-functions')
 
 const app_menu_template = [
     ...(isMac() ? [{
@@ -64,6 +64,7 @@ const app_menu_template = [
                     }
                 ]
             },
+            { type: 'separator' },
             (isMac()) ? { role: 'close' } : { role: 'quit' }
         ]
     },
