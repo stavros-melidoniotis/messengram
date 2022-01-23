@@ -1,4 +1,4 @@
-const { BrowserWindow } = require('electron')
+const { app, BrowserWindow } = require('electron')
 
 const WINDOW_WIDTH = 1100
 const WINDOW_HEIGHT = 700
@@ -6,7 +6,7 @@ const WINDOW_HEIGHT = 700
 const window = new BrowserWindow({
     width: WINDOW_WIDTH,
     height: WINDOW_HEIGHT,
-    title: 'Messengram',
+    title: app.getName(),
     center: true
 })
 
