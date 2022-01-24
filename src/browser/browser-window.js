@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron')
+const { isMac } = require('../helpers/platform')
 
 const WINDOW_WIDTH = 1100
 const WINDOW_HEIGHT = 700
@@ -16,16 +17,19 @@ window.on('resize', () => {
     const totalViews = attachedViews.length
     const windowBounds = window.getBounds()
 
+    const windowWidth = windowBounds.width
+    const windowHeight = isMac() ? windowBounds.height - 20 : windowBounds.height
+
     for (let view of attachedViews) {
         let currentX = view.getBounds().x
         const currentY = view.getBounds().y
 
         if (currentX !== 0) {
-            currentX = Math.floor(windowBounds.width / totalViews)
+            currentX = Math.floor(windowWidth / totalViews)
         }
 
         setTimeout(() => {
-            view.setBounds({ x: currentX, y: currentY, width: Math.floor(windowBounds.width / totalViews), height: windowBounds.height })
+            view.setBounds({ x: currentX, y: currentY, width: Math.floor(windowWidth / totalViews), height: windowHeight })
         }, 10)
     }
 })
