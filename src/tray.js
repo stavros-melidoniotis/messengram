@@ -1,11 +1,11 @@
-const { app, Tray } = require('electron')
+const { app, Tray, nativeImage } = require('electron')
 const { tray_menu } = require('./menu/menu-templates')
 const { isMac } = require('./helpers/platform')
 
 const path = require('path')
 
-const trayIconPath = path.join(__dirname, '..', 'build', 'icons', '512x512.png')
-const tray = new Tray(trayIconPath)
+const trayIcon = nativeImage.createFromPath(path.join(__dirname, '..', 'resources', 'icons', '16x16.png'))
+const tray = new Tray(trayIcon)
 
 tray.setToolTip(app.getName())
 
@@ -20,7 +20,7 @@ const setTrayMenu = () => {
 setTrayMenu()
 
 tray.on('click', () => {
-    setTrayMenu()
+    tray.setContextMenu(tray_menu)
 })
 
 module.exports = { tray }

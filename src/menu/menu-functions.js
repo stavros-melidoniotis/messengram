@@ -10,7 +10,7 @@ app.setAboutPanelOptions({
     applicationVersion: app.getVersion(),
     version: app.getVersion(),
     authors: ['Stavros Melidoniotis <melidon.stavros@gmail.com>'],
-    iconPath: path.join(__dirname, '..', '..', 'build', 'icons', '64x64.png')
+    iconPath: path.join(__dirname, '..', '..', 'resources', 'icons', '64x64.png')
 })
 
 exports.toggleDarkMode = (enable, triggeredFromMenu = false) => {

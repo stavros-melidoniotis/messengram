@@ -20,19 +20,19 @@
     },
     "linux": {
       "target": "deb",
-      "icon": "build/icon.icns",
+      "icon": "resources/icon.icns",
       "synopsis": "Messenger and Instagram combined under a single cross-platform app.",
       "category": "InstantMessaging"
     },
     "mac": {
       "category": "public.app-category.social-networking",
       "target": "dmg",
-      "icon": "build/icon.icns",
+      "icon": "resources/icon.icns",
       "darkModeSupport": true
     },
     "win": {
       "target": "nsis",
-      "icon": "build/icon.ico"
+      "icon": "resources/icon.ico"
     }
   }
 }
