@@ -1,12 +1,63 @@
-const { app, Menu } = require('electron')
+const { app, Menu, BrowserWindow } = require('electron')
 const { isMac } = require('./helpers/platform')
 
 const settingsHelper = require('./helpers/settings')
 
 const createWindow = () => {
-    const { window } = require('./browser/browser-window')
+    const { windowWidth, windowHeight } = settingsHelper.getWindowDimensionsSetting()
+
+    const window = new BrowserWindow({
+        width: windowWidth,
+        height: windowHeight,
+        title: app.getName(),
+        center: true
+    })
 
     return window
+}
+
+const initializeApp = () => {
+    const { messengerView, instagramView } = require('./browser/browser-views')
+    const { app_menu } = require('./menu/menu-templates')
+    const { toggleDarkMode, showViews } = require('./menu/menu-functions')
+    const { tray } = require('./tray')
+
+    const window = createWindow()
+    window.addBrowserView(messengerView)
+    window.addBrowserView(instagramView)
+
+    Menu.setApplicationMenu(app_menu)
+
+    window.on('ready-to-show', () => {
+        // Set the initial views based on user preferences
+        showViews(settingsHelper.getViewsToShowSetting())
+
+        // Set dark theme on/off based on user preferences
+        toggleDarkMode(settingsHelper.getDarkModeSetting())
+    })
+
+    // Resize views when window resizes
+    window.on('resize', () => {
+        const attachedViews = window.getBrowserViews()
+        const totalViews = attachedViews.length
+        const windowBounds = window.getBounds()
+
+        const windowWidth = windowBounds.width
+        const windowHeight = isMac() ? windowBounds.height - 20 : windowBounds.height
+
+        for (let view of attachedViews) {
+            let currentX = view.getBounds().x
+            const currentY = view.getBounds().y
+
+            if (currentX !== 0) {
+                currentX = Math.floor(windowWidth / totalViews)
+            }
+
+            setTimeout(() => {
+                view.setBounds({ x: currentX, y: currentY, width: Math.floor(windowWidth / totalViews), height: windowHeight })
+            }, 10)
+        }
+    })
 }
 
 app.whenReady()
@@ -15,27 +66,14 @@ app.whenReady()
             settingsHelper.createSettingsFile()
         }
     })
-    .then(() => {
-        const { messengerView, instagramView } = require('./browser/browser-views')
-        const { app_menu } = require('./menu/menu-templates')
-        const { toggleDarkMode, showViews } = require('./menu/menu-functions')
-        const { tray } = require('./tray')
-
-        const window = createWindow()
-        window.addBrowserView(messengerView)
-        window.addBrowserView(instagramView)
-
-        Menu.setApplicationMenu(app_menu)
-
-        window.on('ready-to-show', () => {
-            // Set the initial views based on user preferences
-            showViews(settingsHelper.getViewsToShowSetting())
-
-            // Set dark theme on/off based on user preferences
-            toggleDarkMode(settingsHelper.getDarkModeSetting())
-        })
-    })
+    .then(initializeApp)
 
 app.on('window-all-closed', () => {
     if (!isMac()) app.quit()
+})
+
+app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+        initializeApp()
+    }
 })

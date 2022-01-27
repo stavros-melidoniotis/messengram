@@ -1,8 +1,7 @@
 const settingsHelper = require('../helpers/settings')
 const path = require('path')
 
-const { app } = require('electron')
-const { window } = require('../browser/browser-window')
+const { app, BrowserWindow } = require('electron')
 const { messengerView, instagramView } = require('../browser/browser-views')
 
 app.setAboutPanelOptions({
@@ -13,7 +12,7 @@ app.setAboutPanelOptions({
     iconPath: path.join(__dirname, '..', '..', 'resources', 'icons', '64x64.png')
 })
 
-exports.toggleDarkMode = (enable, triggeredFromMenu = false) => {
+exports.toggleDarkMode = (isEnabled, triggeredFromMenu = false) => {
     const darkThemeCSS = `
         html {
             -webkit-filter: invert(100%);
@@ -50,7 +49,7 @@ exports.toggleDarkMode = (enable, triggeredFromMenu = false) => {
             -ms-filter: invert(0);
         }`
 
-    const cssToInsert = (enable) ? darkThemeCSS : lightThemeCSS
+    const cssToInsert = (isEnabled) ? darkThemeCSS : lightThemeCSS
 
     messengerView.webContents.insertCSS(cssToInsert)
     instagramView.webContents.insertCSS(cssToInsert)
@@ -58,16 +57,17 @@ exports.toggleDarkMode = (enable, triggeredFromMenu = false) => {
     if (triggeredFromMenu) {
         const settings = settingsHelper.readSettingsFile()
 
-        settings.dark_mode_enabled = enable
+        settings.dark_mode = isEnabled
         settingsHelper.writeSettingsFile(settings)
 
         return
     }
 
-    setMenuItemChecked('menu_item_toggle_dark_mode')
+    setMenuItemChecked('menu_item_toggle_dark_mode', isEnabled)
 }
 
 exports.showViews = (viewToShow, triggeredFromMenu = false) => {
+    const window = BrowserWindow.getAllWindows()[0]
     const windowBounds = window.getBounds()
 
     switch (viewToShow) {
@@ -104,16 +104,17 @@ exports.showViews = (viewToShow, triggeredFromMenu = false) => {
 
 // Sets the menu item checked property to true,
 // when a change occured programmatically
-function setMenuItemChecked(menuItemId) {
+function setMenuItemChecked(menuItemId, isEnabled) {
     const { Menu } = require('electron')
 
     const menu = Menu.getApplicationMenu()
     const correspondingMenuItem = menu.getMenuItemById(menuItemId)
 
-    correspondingMenuItem.checked = true
+    correspondingMenuItem.checked = isEnabled
 }
 
 exports.reloadView = (view) => {
+    const window = BrowserWindow.getAllWindows()[0]
     const browserViews = window.getBrowserViews()
     const viewIsVisible = browserViews.find(browserView => {
         return browserView === view
@@ -126,6 +127,8 @@ exports.reloadView = (view) => {
 }
 
 exports.toggleAppVisibility = () => {
+    const window = BrowserWindow.getAllWindows()[0];
+
     (window.isVisible()) ? window.hide() : window.show()
 }
 
