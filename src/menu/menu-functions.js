@@ -129,6 +129,12 @@ exports.reloadView = (view) => {
 exports.toggleAppVisibility = () => {
     const window = BrowserWindow.getAllWindows()[0];
 
+    // TODO: Handle this better
+    if (!window) {
+        this.relaunchApp()
+        return
+    } 
+
     (window.isVisible()) ? window.hide() : window.show()
 }
 

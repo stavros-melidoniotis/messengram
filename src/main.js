@@ -16,15 +16,17 @@ const createWindow = () => {
     return window
 }
 
-const initializeApp = () => {
+const initializeApp = (firstTime = true) => {
     const { messengerView, instagramView } = require('./browser/browser-views')
     const { app_menu } = require('./menu/menu-templates')
     const { toggleDarkMode, showViews } = require('./menu/menu-functions')
     const { tray } = require('./tray')
 
-    const window = createWindow()
-    window.addBrowserView(messengerView)
-    window.addBrowserView(instagramView)
+    const window = createWindow();
+
+    (firstTime) ?
+        (window.addBrowserView(messengerView), window.addBrowserView(instagramView)) :
+        showViews(settingsHelper.getViewsToShowSetting())
 
     Menu.setApplicationMenu(app_menu)
 
@@ -74,6 +76,6 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-        initializeApp()
+        initializeApp(false)
     }
 })

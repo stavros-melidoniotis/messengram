@@ -1,4 +1,4 @@
-const { app, BrowserView, BrowserWindow } = require('electron')
+const { BrowserView } = require('electron')
 const { isMac } = require('../helpers/platform')
 
 const settingsHelper = require('../helpers/settings')
@@ -17,15 +17,6 @@ if (!isMac()) {
 
 messengerView.setBounds({ x: 0, y: 0, width: windowWidth / 2, height: windowHeight - 20 })
 messengerView.webContents.loadURL(MESSENGER_URL)
-
-messengerView.webContents.on('page-title-updated', () => {
-    const pageTitle = messengerView.webContents.getTitle()
-    const pageTitleEdited = pageTitle.replace(/ Messenger|Messenger/, '')
-    const messengerTitlePart = (pageTitleEdited == '') ? '' : `${pageTitleEdited} -`
-    const window = BrowserWindow.getAllWindows()[0]
-
-    window.setTitle(`${messengerTitlePart} ${app.getName()}`)
-})
 
 instagramView.setBounds({ x: windowWidth / 2, y: 0, width: windowWidth / 2, height: windowHeight })
 instagramView.webContents.loadURL(INSTAGRAM_URL)
