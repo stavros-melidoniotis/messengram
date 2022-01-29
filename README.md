@@ -20,27 +20,18 @@ If you've related yourself to me, give Messengram a shot. You can download it fo
 - Choose which views you want to see at any time (Messenger, Instagram or both)
 - Dark mode
 
-# Screenshots
-
-![](https://i.imgur.com/Vurqenkl.png)
-
-<p align="center">
-  <!-- Both views w/ dark theme -->
-  <img width="500" src="https://i.imgur.com/IrRGHKbl.png?1">
-  <img width="500" src="https://i.imgur.com/O6JuyAJl.png">
-</p>
-
-<p align="center">
-  <!-- Separate views -->
-  <img width="500" src="https://i.imgur.com/DpIIb52l.png">
-  <img width="500" src="https://i.imgur.com/6njqBTel.png">
-</p>
-
 # Wanna experiment?
 
 1. Clone the repo and run `npm install` to download all the required modules. 
 2. After any changes made to the code you must test the app by running `npm start`, which will run the app in development mode. 
 3. No bugs? Great! Go ahead and build the app by running `npx electron-builder build`. The app will compile into an executable that will run on your OS (for instance, if you build it in Windows it will generate an .exe file). For more electron-builder options refer to [their docs](https://www.electron.build/).
+
+# Screenshots
+![](https://i.imgur.com/Vurqenk.png)
+![](https://i.imgur.com/IrRGHKb.png?1)
+![](https://i.imgur.com/O6JuyAJ.png)
+![](https://i.imgur.com/DpIIb52.png)
+![](https://i.imgur.com/6njqBTe.png)
 
 # Built with
 [Electron](https://www.electronjs.org/)
