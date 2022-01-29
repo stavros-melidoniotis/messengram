@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Messengram</title>
+    <link rel="icon" type="image/png" href="./resources/icons/512x512.png"/>
+
+    <meta name="title" content="Messengram">
+    <meta name="description" content="Messenger and Instagram combined under a single cross-platform app!">
+    <meta name="keywords" content="messengram, messenger, instagram, social, messaging, desktop">
+    <meta name="author" content="Stavros Melidoniotis">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://stavros-melidoniotis.github.io/messengram/">
+    <meta property="og:title" content="Messengram">
+    <meta property="og:description" content="Messenger and Instagram combined under a single cross-platform app!">
+    <meta property="og:image" content="https://stavros-melidoniotis.github.io/messengram/landing-page/assets/images/messengram-both-views.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://stavros-melidoniotis.github.io/messengram/">
+    <meta property="twitter:title" content="Messengram">
+    <meta property="twitter:description" content="Messenger and Instagram combined under a single cross-platform app!">
+    <meta property="twitter:image" content="https://stavros-melidoniotis.github.io/messengram/landing-page/assets/images/messengram-both-views.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="./landing-page/assets/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img width="80" height="80" src="./resources/icons/256x256.png" alt="Logo">
+                    Messengram
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"> <a class="nav-link" aria-current="page" href="#about">About</a> </li>
+                        <li class="nav-item"> <a class="nav-link" href="#features">Features</a> </li>
+                        <li class="nav-item"> <a class="nav-link" href="https://github.com/stavros-melidoniotis/messengram" target="_blank" rel="noopener">Source Code</a> </li>
+                        <li class="nav-item"> <a class="nav-link" href="#download"> Download </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about">
+            <div class="container d-flex flex-column justify-content-center gap-3">
+                <h1 id="intro-text" class="section-title text-center"> A desktop application that combines <span id="messenger">Messenger</span> and <span id="instagram">Instagram</span> into one single UI </h1>
+                <img id="messengram-main-screen" class="with-shadow" src="./landing-page/assets/images/messengram-screens/messengram-both-views.png" alt="Messengram desktop window">
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container d-flex flex-column justify-content-center gap-3">
+                <h1 id="features-text" class="section-title text-center"> Features </h1>
+
+                <div class="feature image-left">
+                    <div class="feature-text">
+                        <h2> Dark Mode </h2>
+                        <p> 
+                            Easily toggle between Dark or Light theme from Messengram's menu (<b>File > Preferences > Toggle Dark Mode</b>) 
+                            or by pressing <kbd>Ctrl/Cmd + D</kbd> on your keyboard.
+                        </p>
+                    </div>
+                    <img loading="lazy" id="messengram-dark-mode" class="with-shadow feature-img" src="./landing-page/assets/images/messengram-screens/messengram-dark-mode.png" alt="Messengram dark mode">
+                </div>
+
+                <div class="feature image-right">
+                    <div class="feature-text">
+                        <h2>Toggle Views</h2>
+                        <p> 
+                            Want to chat on Messenger? Or maybe view some IG stories? You can easily choose the platform that you want to
+                            focus by navigating to <b>File > Preferences</b> and selecting one of the following options:
+
+                            <ul>
+                                <li>- Messenger & Instagram (<kbd>Ctrl/Cmd + Shift + 1</kbd>) </li>
+                                <li>- Messenger only (<kbd>Ctrl/Cmd + Shift + 2</kbd>) </li>
+                                <li>- Instagram only (<kbd>Ctrl/Cmd + Shift + 3</kbd>) </li>
+                            </ul>
+                        </p>
+                    </div>
+                    <img loading="lazy" id="messengram-toggle-views" class="feature-img" src="./landing-page/assets/images/messengram-screens/messengram-toggle-views.png" alt="Messengram toggle views">
+                </div>
+
+                <div class="feature image-left">
+                    <div class="feature-text">
+                        <h2>Cross platform</h2>
+                        <p> 
+                            Enjoy Messengram whether you're a Windows, MacOS or Linux user. It works seamlessly on all major Operating Systems!
+                        </p>
+                    </div>
+                    <img loading="lazy" id="messengram-cross-platform" class="feature-img" src="./landing-page/assets/images/messengram-screens/messengram-cross-platform.jpg" alt="Messengram cross platform">
+                </div>
+            </div>
+        </section>
+
+        <section id="download">
+            <div class="container d-flex flex-column justify-content-center gap-3">
+                <h1 id="download-text" class="section-title text-center"> Download Messengram </h1>
+
+                <div id="recommendation"></div>
+
+                <div id="dl-links" class="d-flex flex-column">
+                    <div id="platforms-wrapper">
+                        <a id="linux" href="https://github.com/stavros-melidoniotis/messengram/releases/download/v1.0.0/messengram_amd64.deb">
+                            <div class="platform">
+                                <img loading="lazy" src="./landing-page/assets/images/platforms/ubuntu-logo.svg" alt="Ubuntu">
+                                Download for Linux 
+                            </div>
+                        </a>
+
+                        <a id="windows" href="https://github.com/stavros-melidoniotis/messengram/releases/download/v1.0.0/messengram.exe"> 
+                            <div class="platform">
+                                <img loading="lazy" src="./landing-page/assets/images/platforms/windows-logo.svg" alt="Windows">
+                                Download for Windows 
+                            </div>
+                        </a>
+
+                        <a id="macos" href="https://github.com/stavros-melidoniotis/messengram/releases/download/v1.0.0/messengram-arm64.dmg">
+                            <div class="platform">
+                                <img loading="lazy" src="./landing-page/assets/images/platforms/apple-logo.svg" alt="Apple">
+                                Download for MacOS
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer> 
+        <p id="creator"> 
+            Built by  
+            <a href="https://www.linkedin.com/in/stavros-melidoniotis/" target="_blank" rel="noopener">Stavros Melidoniotis</a>
+        </p>
+    </footer>
+
+    <script src="./landing-page/assets/main.js"></script>
+</body>
+</html>
