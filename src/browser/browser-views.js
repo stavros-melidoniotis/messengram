@@ -1,4 +1,4 @@
-const { BrowserView } = require('electron')
+const { BrowserView, shell } = require('electron')
 const { isMac } = require('../helpers/platform')
 
 const settingsHelper = require('../helpers/settings')
@@ -9,6 +9,13 @@ const messengerView = new BrowserView()
 const instagramView = new BrowserView()
 
 const { windowWidth, windowHeight } = settingsHelper.getWindowDimensionsSetting()
+
+const openExternalLinksInBrowser = (view) => {
+    view.webContents.setWindowOpenHandler(({ url }) => {
+        shell.openExternal(url)
+        return { action: 'deny' }
+    })
+}
 
 if (!isMac()) {
     messengerView.setAutoResize({ width: true, height: true, horizontal: true, vertical: true })
@@ -21,7 +28,10 @@ messengerView.webContents.loadURL(MESSENGER_URL)
 instagramView.setBounds({ x: windowWidth / 2, y: 0, width: windowWidth / 2, height: windowHeight })
 instagramView.webContents.loadURL(INSTAGRAM_URL)
 
-module.exports = { 
+openExternalLinksInBrowser(messengerView)
+openExternalLinksInBrowser(instagramView)
+
+module.exports = {
     messengerView: messengerView,
-    instagramView: instagramView 
+    instagramView: instagramView
 }

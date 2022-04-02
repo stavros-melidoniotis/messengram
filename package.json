@@ -1,7 +1,7 @@
 {
   "name": "messengram",
   "productName": "Messengram",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Messenger and Instagram combined under a single cross-platform app.",
   "main": "src/main.js",
   "scripts": {
