@@ -11,9 +11,9 @@ I am a guy that uses a Computer for almost anything (let it be work, entertainme
 Long story short, I couldn't find any app to match my needs and that's why I decided to build **Messengram**, a cross platform app that combines Messenger and Instagram inboxes.
 
 If you've related yourself to me, give Messengram a shot. You can download it for: 
-[Windows](https://github.com/stavros-melidoniotis/messengram/releases/download/v1.0.0/messengram.exe), 
-[Linux](https://github.com/stavros-melidoniotis/messengram/releases/download/v1.0.0/messengram_amd64.deb) and 
-[MacOS](https://github.com/stavros-melidoniotis/messengram/releases/download/v1.0.0/messengram-arm64.dmg).
+[Windows](https://github.com/stavros-melidoniotis/messengram/releases/download/v1.1.0/messengram-win.zip), 
+[Linux](https://github.com/stavros-melidoniotis/messengram/releases/download/v1.1.0/messengram_amd64.deb) and 
+[MacOS](https://github.com/stavros-melidoniotis/messengram/releases/download/v1.1.0/messengram-arm64.dmg).
 
 # Features
 - Side by side views of Messenger and Instagram
